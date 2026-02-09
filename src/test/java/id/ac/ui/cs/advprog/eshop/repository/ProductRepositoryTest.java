@@ -62,4 +62,68 @@ public class ProductRepositoryTest {
         assertEquals(product2.getProductId(), savedProduct.getProductId());
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void testFindById() {
+        Product product1 = new Product();
+        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product1.setProductName("Sampo Cap Bambang");
+        product1.setProductQuantity(100);
+        productRepository.create(product1);
+
+        assertEquals(product1,  productRepository.findById(product1.getProductId()));
+        assertNull(productRepository.findById("000000"));
+    }
+
+    @Test
+    void testDeleteProduct() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        productRepository.deleteById(product.getProductId());
+        assertFalse(productIterator.hasNext());
+    }
+
+    @Test
+    void testEditProduct() {
+        Product oldProduct = new Product();
+        oldProduct.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        oldProduct.setProductName("Sampo Cap Bambang");
+        oldProduct.setProductQuantity(100);
+        productRepository.create(oldProduct);
+
+        Product newProduct = new Product();
+        newProduct.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        newProduct.setProductName("Sampo Cap Bang");
+        newProduct.setProductQuantity(20);
+        productRepository.edit(newProduct);
+
+        Product updatedProduct = productRepository.findById(newProduct.getProductId());
+
+        assertEquals(newProduct.getProductId(), updatedProduct.getProductId());
+        assertEquals(newProduct.getProductName(), updatedProduct.getProductName());
+        assertEquals(newProduct.getProductQuantity(), updatedProduct.getProductQuantity());
+
+        Product fakeProduct = new Product();
+        fakeProduct.setProductId("eb558e9f-1c39-460e-8860");
+        fakeProduct.setProductName("Sampo Cap Bang");
+        fakeProduct.setProductQuantity(20);
+        productRepository.edit(fakeProduct);
+
+        assertNull(productRepository.edit(fakeProduct));
+
+        Product nullProduct = new Product();
+        productRepository.edit(nullProduct);
+        assertNull(productRepository.edit(nullProduct));
+
+        assertNull(productRepository.edit(null));
+
+
+
+    }
 }
