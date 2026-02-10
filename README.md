@@ -1,8 +1,9 @@
-# Eshop (Spring Boot) — Refleksi
+# Eshop (Spring Boot) 
+
+## Refleksi 1
 
 Repository ini menggunakan Spring Boot (Spring MVC + Thymeleaf) dengan arsitektur sederhana **Controller -> Service -> Repository**. Pada modul ini saya menambahkan dua fitur backend: **delete product** dan **edit product** (berdasarkan `productId`). Sesuai requirement tugas, fokusnya ada di **backend**, bukan UI/HTML.
 
-## Refleksi 1
 
 ## Fitur yang ditambahkan (Backend)
 

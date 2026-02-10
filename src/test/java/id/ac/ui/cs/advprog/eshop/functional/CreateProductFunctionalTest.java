@@ -48,8 +48,8 @@ class CreateProductFunctionalTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         driver.get(baseUrl);
-        wait.until(ExpectedConditions.titleIs("ADV Shop"));
-        assertEquals("ADV Shop", driver.getTitle());
+        wait.until(ExpectedConditions.titleIs("eShop"));
+        assertEquals("eShop", driver.getTitle());
 
         driver.findElement(By.linkText("View Products")).click();
         wait.until(ExpectedConditions.titleIs("Product List"));
